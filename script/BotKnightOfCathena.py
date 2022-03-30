@@ -215,8 +215,7 @@ def GetMission(driver):
                 temp = 1
             else:
                 temp == 2
-            sleep(1)
-        sleep(500)
+            sleep(5)
     except(NoSuchElementException):
         exit(84)
 
