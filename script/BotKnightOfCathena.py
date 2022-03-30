@@ -9,7 +9,7 @@ import names
 import pyperclip
 
 def ProxyConnection():
-    f = open("Proxiesus.txt", "r")
+    f = open("Proxies.txt", "r")
     list_of_lines = f.readlines()
     if not any("x " in s for s in list_of_lines):
         list_of_lines[0] = "x " + list_of_lines[0]
