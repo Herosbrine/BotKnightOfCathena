@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from weakref import proxy
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
@@ -6,6 +7,22 @@ from selenium.webdriver.common.keys import Keys
 import random
 import names
 import pyperclip
+
+def ProxyConnection():
+    f = open("Proxiesus.txt", "r")
+    list_of_lines = f.readlines()
+    if not any("x " in s for s in list_of_lines): # add locator to first item in file when running for first the time
+        list_of_lines[0] = "x " + list_of_lines[0]
+    for index, line in enumerate(list_of_lines):
+        if "x " in line:
+            next_index = index + 1
+            if index == len(list_of_lines) -1:
+                next_index = 0
+
+            list_of_lines[index] = list_of_lines[index].split("x ").pop() # update current line
+            proxy = list_of_lines[index]
+            list_of_lines[next_index] = "x " + list_of_lines[next_index] # update next line
+            return (proxy)
 
 def Suivant(driver):
     buttons = driver.find_elements_by_xpath('//*[@class="css-901oao r-1awozwy r-6koalj r-18u37iz r-16y2uox r-37j5jr r-a023e6 r-b88u0q r-1777fci r-rjixqe r-bcqeeo r-q4m81j r-qvutc0"]')
@@ -222,9 +239,18 @@ def GetMission(driver):
 def main():
     try:
         s = "C:\\WebDriver\\bin\\chromedriver.exe"
-        while (1):        
+        while (1):
             driver = webdriver.Chrome(s)
-            driver.set_page_load_timeout(10)
+            """ proxy code
+            proxy = ProxyConnection()
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument(f'--proxy-server={proxy}')
+            driver = webdriver.Chrome(options=chrome_options, executable_path=s)
+            driver.get("http://httpbin.org/ip")
+            body_text = driver.find_element_by_tag_name('body').text
+            sleep(100)
+             """
+            driver.set_page_load_timeout(30)
             GetEmail(driver)
             driver.execute_script("window.open('');") 
             driver.switch_to.window(driver.window_handles[1])
