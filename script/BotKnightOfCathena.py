@@ -239,12 +239,12 @@ def GetMission(driver):
 def main():
     try:
         s = "C:\\WebDriver\\bin\\chromedriver.exe"
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument
+        ("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        +"AppleWebKit/537.36 (KHTML, like Gecko)"
+        +"Chrome/87.0.4280.141 Safari/537.36")
         while (1):
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument
-            ("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-            +"AppleWebKit/537.36 (KHTML, like Gecko)"
-            +"Chrome/87.0.4280.141 Safari/537.36")
             driver = webdriver.Chrome(options=chrome_options, executable_path=s)
             """ proxy code
             proxy = ProxyConnection()
