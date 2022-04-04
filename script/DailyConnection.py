@@ -17,8 +17,19 @@ def DoConnection(email_twitter, password_twitter):
     sleep(1)
     driver.find_elements_by_xpath('//*[@class="koc-button css-n62otd"]')[0].click()
     sleep(1)
+    #ChangePseudo(driver)
     VerifyMission(driver)
     driver.quit()
+
+def ChangePseudo(driver):
+    driver.find_elements_by_xpath('//*[@class="css-x8r0q9"]')[3].click()
+    sleep(1)
+    driver.find_elements_by_xpath('//*[@class="css-1x49duo"]')[0].click()
+    sleep(1)
+    driver.find_elements_by_xpath('//*[@class="css-wu3xg0"]')[0].click()
+    sleep(1)
+    driver.find_elements_by_xpath('//*[@class="css-wu3xg0"]')[1].click()
+    sleep(1)
 
 def VerifyMission(driver):
     BoutonMissions = driver.find_elements_by_xpath("//*[@class='koc-button css-1jb9frs']")
