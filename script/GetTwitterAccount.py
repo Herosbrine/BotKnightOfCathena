@@ -6,6 +6,29 @@ from selenium.webdriver.common.keys import Keys
 import random
 import names
 
+proxy_actual = []
+
+def ProxyConnection():
+    global proxy_actual
+    temp = 0
+
+    f = open("Proxies.txt", "r")
+    list_of_lines = f.readlines()
+    for line in enumerate(list_of_lines):
+        if (line == proxy_actual):
+            temp += 1
+            continue
+        elif (proxy_actual == []):
+            proxy_actual = line
+            f.close()
+            return (line)
+        elif(line != proxy_actual and temp > 0):
+            proxy_actual = line
+            f.close()
+            return (line)
+        else:
+            continue
+
 def Suivant(driver):
     buttons = driver.find_elements_by_xpath('//*[@class="css-901oao r-1awozwy r-6koalj r-18u37iz r-16y2uox r-37j5jr r-a023e6 r-b88u0q r-1777fci r-rjixqe r-bcqeeo r-q4m81j r-qvutc0"]')
     for button in buttons:
@@ -27,7 +50,11 @@ def main():
         link_to = "https://twitter.com/i/flow/signup"
         LinkToGenerateEmail = "https://temp-mail.org/fr/"
         s = "C:\\WebDriver\\bin\\chromedriver.exe"
-        driver = webdriver.Chrome(s)
+        ###---------PROXY ROTATION---------###
+        proxy = ProxyConnection()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument(f'--proxy-server={proxy}')
+        driver = webdriver.Chrome(options=chrome_options, executable_path=s)
         driver.set_page_load_timeout(10)
         driver.get(LinkToGenerateEmail)
         sleep(10)
