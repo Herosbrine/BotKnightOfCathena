@@ -316,14 +316,16 @@ def main():
             proxy = ProxyConnection()
             chrome_options = webdriver.ChromeOptions()
             #chrome_options.add_argument(f"user-agent={userAgent}")
-            chrome_options.add_argument(f'--proxy-server={proxy[1]}')
+            ###---------ADD PROXY TO CHROME OPTIONS---------###
+            #chrome_options.add_argument(f'--proxy-server={proxy[1]}')
             ###---------GET PROXY PORT---------###
+            #IpProxy, Port = GetProxyInfo(proxy)
             ###---------TEST PROXY CONNECTION---------###
             """driver = webdriver.Chrome(options=chrome_options, executable_path=s)
             driver.get("http://httpbin.org/ip")
             body_text = driver.find_element_by_tag_name('body').text """
             #print("proxy : ", proxy[1])
-            """
+            
             ###---------INIT CONNECTION TO CHROME---------###
             driver = webdriver.Chrome(options=chrome_options, executable_path=s)
             driver.set_page_load_timeout(30)
@@ -345,7 +347,7 @@ def main():
             ###---------DO THE MISSION OF KNIGHT OF CATHENA---------###
             GetMission(driver)
             driver.quit()
-            sleep(random.randint(2,2)) """
+            sleep(random.randint(2,2))
     except(NoSuchElementException):
         exit(84)
 main()
